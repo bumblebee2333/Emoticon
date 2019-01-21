@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_emoticon"
+        android:icon="@drawable/emoticon"
+        android:title="表情包"/>
+
+    <item
+        android:id="@+id/navigation_DIY"
+        android:icon="@drawable/diy"
+        android:title="创意工坊"/>
+
+    <item
+        android:id="@+id/navigation_paint"
+        android:icon="@drawable/paint"
+        android:title="涂鸦"/>
+
+    <item
+        android:id="@+id/navigation_my"
+        android:icon="@drawable/my"
+        android:title="我的"/>
+
+</menu>
