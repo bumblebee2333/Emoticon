@@ -8,42 +8,38 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFF00">
+        android:background="@drawable/gradient_background">
 
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="斗图"
-            android:typeface="serif"
-            android:textStyle="bold"
-            android:textSize="22dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="斗"
-            android:textColor="#FFFF00"/>
+            android:src="@drawable/yellow_emoticon"/>
 
         <EditText
             android:id="@+id/edit_text"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="36dp"
             android:background="@drawable/edit_text"
-            android:hint="🔍搜索表情包"
+            android:hint="🔍点击搜索表情包"
+            android:layout_gravity="center"
             android:gravity="center"
             android:cursorVisible="false"
             android:textSize="16sp">
-
         </EditText>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
 
     </android.support.v7.widget.Toolbar>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout_1"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:tabBackground="@drawable/tab_horizontal_item_p"
+        android:layout_height="wrap_content"
         app:tabIndicatorHeight="0dp"
+        app:tabBackground="@drawable/tablayout_underline"
         app:tabTextAppearance="@style/TabLayoutTextStyle"/>
 
     <android.support.v4.view.ViewPager

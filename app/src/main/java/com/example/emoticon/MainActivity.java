@@ -2,6 +2,7 @@ package com.example.emoticon;
 
 import android.graphics.Color;
 import android.os.Build;
+import android.service.notification.StatusBarNotification;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -25,19 +26,30 @@ public class MainActivity extends AppCompatActivity {
     private MyFragment myFragment;
     private Fragment[] fragments;//fragment数组
     private int lastShowFragment;//表示最后一个显示的Fragment
+    private View statusBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-            getWindow().setStatusBarColor(Color.parseColor("#FFFF00"));
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
+//        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+//            getWindow().setStatusBarColor(Color.parseColor("#FFFF00"));
+//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//        }
+
+        //设置状态栏颜色
+        getWindow().getDecorView().addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                initStatusBar();
+                getWindow().getDecorView().removeOnLayoutChangeListener(this);
+            }
+        });
+
         //隐藏ActionBar
-        ActionBar actionBar=getSupportActionBar();
-        actionBar.hide();
+        //ActionBar actionBar=getSupportActionBar();
+        //actionBar.hide();
 
         navigation = findViewById(R.id.bottomNavigation);
         initFragments();//初始化Fragment数组，将四个碎片加入
@@ -98,6 +110,17 @@ public class MainActivity extends AppCompatActivity {
             transaction.add(R.id.main_container,fragments[index]);
         }
         transaction.show(fragments[index]).commitAllowingStateLoss();
+    }
+
+    private void initStatusBar(){
+        if (statusBarView == null) {
+            //利用反射机制修改状态栏背景
+            int identifier = getResources().getIdentifier("statusBarBackground", "id", "android");
+            statusBarView = getWindow().findViewById(identifier);
+        }
+        if (statusBarView != null) {
+            statusBarView.setBackgroundResource(R.drawable.gradient_background);
+        }
     }
 }
 

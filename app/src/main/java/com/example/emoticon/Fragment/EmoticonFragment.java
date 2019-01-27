@@ -1,5 +1,6 @@
 package com.example.emoticon.Fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.SearchView;
 
 import com.example.emoticon.Activity.SearchActivity;
 import com.example.emoticon.Adapter.MainPageAdapter;
@@ -22,19 +22,20 @@ public class EmoticonFragment extends Fragment {
     private ViewPager mViewPager;
     private EditText editText;
 
+    @SuppressLint("ResourceType")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.emoticon_fragment,container,false);
-//        editText = getActivity().findViewById(R.id.edit_text);
-//        //跳转到搜索界面
-//        editText.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(),SearchActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        editText = view.findViewById(R.id.edit_text);
+        //跳转到搜索界面
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),SearchActivity.class);
+                startActivity(intent);
+           }
+        });
         return view;
     }
 
@@ -47,8 +48,8 @@ public class EmoticonFragment extends Fragment {
 
         mTabLayout.addTab(mTabLayout.newTab().setText("最新"));
         mTabLayout.addTab(mTabLayout.newTab().setText("热门"));
-        mTabLayout.setTabTextColors(getResources().getColor(R.color.colorBlack),
-                getResources().getColor(R.color.colorWhite));
+        mTabLayout.setTabTextColors(getResources().getColor(R.color.darkgray),
+                getResources().getColor(R.color.gold));
         mViewPager.setAdapter(new MainPageAdapter(getChildFragmentManager()));
         mViewPager.addOnPageChangeListener(new TabLayout.
                 TabLayoutOnPageChangeListener(mTabLayout));
